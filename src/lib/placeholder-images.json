@@ -1,0 +1,28 @@
+{
+  "placeholderImages": [
+    {
+      "id": "story_1",
+      "description": "A whimsical, open storybook in a magical forest.",
+      "imageUrl": "https://images.unsplash.com/photo-1614706983204-cf1e14c84254?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzdG9yeWJvb2slMjBmb3Jlc3R8ZW58MHx8fHwxNzY1ODk2OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "storybook forest"
+    },
+    {
+      "id": "story_2",
+      "description": "A silhouette of a castle against a starry night sky.",
+      "imageUrl": "https://images.unsplash.com/photo-1647684721330-32089de6f424?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYXN0bGUlMjBuaWdodHxlbnwwfHx8fDE3NjU4OTY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "castle night"
+    },
+    {
+      "id": "story_3",
+      "description": "A friendly dragon flying over green hills.",
+      "imageUrl": "https://images.unsplash.com/photo-1623913103041-587ac6750696?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmcmllbmRseSUyMGRyYWdvbnxlbnwwfHx8fDE3NjU4OTY5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "friendly dragon"
+    },
+    {
+      "id": "story_4",
+      "description": "A path leading through an enchanted, glowing forest.",
+      "imageUrl": "https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZW5jaGFudGVkJTIwZm9yZXN0fGVufDB8fHx8MTc2NTgxNDMyMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "enchanted forest"
+    }
+  ]
+}
