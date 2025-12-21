@@ -113,6 +113,18 @@ export const translations = {
     skill_repetition_content: 'Repetition of phrases or themes helps children follow the story and predict what might happen next. It creates a sense of comfort and rhythm, like a familiar song.',
     skill_show_dont_tell_title: 'Show, Don\'t Tell',
     skill_show_dont_tell_content: 'Instead of saying \'The dragon was scary,\' describe its smoke-filled nostrils and the way the ground shook with its roar. Let the reader feel the emotion through actions and sensory details.',
+
+    // Submit Feedback
+    submit_feedback_page_title: 'Submit Feedback',
+    submit_feedback_page_subtitle: 'Have a story you wrote? We\'d love to hear it and provide feedback.',
+    share_your_work_title: 'Share Your Work',
+    share_your_work_description: 'Paste your story or outline below. Our team of expert editors (and friendly robots) will take a look.',
+    your_email: 'Your Email',
+    your_story_outline: 'Your Story / Outline',
+    once_upon_a_time: 'Once upon a time...',
+    submit_feedback_button: 'Submit Feedback',
+    feedback_submitted_title: 'Feedback Received',
+    feedback_submitted_description: 'Thank you for sharing your story! We\'ll take a look soon.',
   },
   zh: {
     // App
@@ -228,6 +240,18 @@ export const translations = {
     skill_repetition_content: '短語或主題的重複可以幫助孩子跟隨故事並預測接下來可能發生的事情。它能創造一種舒適感和節奏感，就像一首熟悉的歌。',
     skill_show_dont_tell_title: '展示，而不是告知',
     skill_show_dont_tell_content: '不要只說「巨龍很可怕」，而是描述它噴煙的鼻孔和大地隨其吼聲震動的樣子。讓讀者通過行動和感官細節感受到情感。',
+
+    // Submit Feedback
+    submit_feedback_page_title: '提交回饋',
+    submit_feedback_page_subtitle: '寫了故事嗎？我們很樂意聽聽並提供建議。',
+    share_your_work_title: '分享您的作品',
+    share_your_work_description: '在下方貼上您的故事或大綱。我們的專家編輯團隊（和友好的機器人）會來看看。',
+    your_email: '您的電子郵件',
+    your_story_outline: '您的故事 / 大綱',
+    once_upon_a_time: '很久很久以前...',
+    submit_feedback_button: '提交回饋',
+    feedback_submitted_title: '已收到回饋',
+    feedback_submitted_description: '感謝分享您的故事！我們很快就會查看。',
   },
 };
 
