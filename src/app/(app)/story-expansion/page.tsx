@@ -69,19 +69,19 @@ export default function StoryExpansionPage() {
     if (!story || !titles) return;
     const { outline } = getValues();
     const currentTitle = getValues("title");
-     if (!currentTitle) {
-        toast({
-          variant: "destructive",
-          title: t('missing_info_title'),
-          description: t('story_title_is_required'),
-        });
-        return;
-      }
-    
+    if (!currentTitle) {
+      toast({
+        variant: "destructive",
+        title: t('missing_info_title'),
+        description: t('story_title_is_required'),
+      });
+      return;
+    }
+
     // For simplicity, we'll use the current title for both languages.
     const finalTitles = {
-        zh: currentTitle,
-        en: currentTitle,
+      zh: currentTitle,
+      en: currentTitle,
     }
 
     setIsSaving(true);
@@ -110,78 +110,88 @@ export default function StoryExpansionPage() {
   };
 
   return (
-    <div className="container mx-auto max-w-7xl">
-       <div className="flex items-center gap-4 mb-8">
-        <Sparkles className="h-10 w-10 text-accent" />
-        <h1 className="text-4xl font-headline font-bold">{t('expand_your_story')}</h1>
-       </div>
-       <p className="text-muted-foreground mb-8">{t('expand_story_description')}</p>
+    <div className="container mx-auto max-w-7xl py-8">
+      <div className="flex items-center gap-4 mb-4">
+        <Sparkles className="h-12 w-12 text-slate-800" />
+        <h1 className="text-5xl font-headline font-bold text-slate-800">{t('expand_your_story_title')}</h1>
+      </div>
+      <p className="text-xl text-slate-600 mb-12">{t('expand_your_story_subtitle')}</p>
 
       <form onSubmit={handleSubmit(handleExpand)}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle>{t('your_outline')}</CardTitle>
-              <CardDescription>{t('paste_your_outline')}</CardDescription>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <Card className="border-none shadow-xl bg-white min-h-[500px] flex flex-col">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-3xl font-headline text-slate-800">{t('your_outline_title')}</CardTitle>
+              <CardDescription className="text-lg text-slate-500">{t('your_outline_description')}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-grow flex flex-col pt-4">
               <Textarea
                 {...register('outline', { required: true })}
-                placeholder={t('outline_placeholder')}
-                className="h-60 text-base"
+                placeholder={t('outline_placeholder_squirrel')}
+                className="flex-grow min-h-[300px] text-lg bg-slate-50/50 border-slate-100 focus:border-blue-400 focus:ring-blue-400 p-6 resize-none"
               />
-              <Button type="submit" disabled={isLoading} className="w-full mt-4">
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full mt-8 h-14 text-lg font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
                 {isLoading ? (
-                  <Loader2 className="animate-spin" />
+                  <Loader2 className="h-6 w-6 animate-spin" />
                 ) : (
-                  <Wand className="mr-2" />
+                  <Sparkles className="mr-3 h-6 w-6" />
                 )}
-                {t('expand_story')}
+                {t('expand_story_button')}
               </Button>
             </CardContent>
           </Card>
-          
-          <Card className="shadow-lg flex flex-col">
-            <CardHeader>
-              <CardTitle>{t('your_completed_story')}</CardTitle>
-              <CardDescription>{t('your_completed_story_description')}</CardDescription>
+
+          <Card className="border-none shadow-xl bg-white min-h-[500px] flex flex-col">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-3xl font-headline text-slate-800">{t('your_completed_story_title')}</CardTitle>
+              <CardDescription className="text-lg text-slate-500">{t('your_completed_story_subtitle')}</CardDescription>
             </CardHeader>
-            <CardContent className="flex-grow">
+            <CardContent className="flex-grow flex flex-col pt-4">
               {isLoading && (
-                 <div className="flex flex-col items-center justify-center rounded-lg border border-dashed h-80 text-center">
-                    <Loader2 className="animate-spin h-10 w-10 text-primary mb-4" />
-                    <p className="font-headline">{t('magic_is_happening')}</p>
-                    <p className="text-muted-foreground text-sm">{t('ai_is_writing')}</p>
-                  </div>
+                <div className="flex flex-col items-center justify-center rounded-2xl bg-slate-50/50 border-2 border-dashed border-slate-100 h-full min-h-[300px] text-center p-8">
+                  <Loader2 className="animate-spin h-16 w-16 text-blue-500 mb-6" />
+                  <p className="text-2xl font-headline text-slate-800 mb-2">{t('magic_is_happening')}</p>
+                  <p className="text-lg text-slate-500">{t('ai_is_writing')}</p>
+                </div>
               )}
               {!isLoading && !story && (
-                <div className="flex flex-col items-center justify-center rounded-lg border border-dashed h-80 text-center p-4">
-                   <Wand className="h-10 w-10 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">{t('expanded_story_placeholder')}</p>
+                <div className="flex flex-col items-center justify-center rounded-2xl bg-slate-50/50 border-2 border-dashed border-slate-100 h-full min-h-[300px] text-center p-8">
+                  <Sparkles className="h-16 w-16 text-blue-300 mb-6" />
+                  <p className="text-xl text-slate-400 max-w-xs">{t('expanded_story_placeholder_text')}</p>
                 </div>
               )}
               {story && (
-                <div className='grid gap-4'>
-                    <Input 
-                        {...register("title", {required: true})}
-                        placeholder={t('story_title_placeholder')}
-                    />
-                    <ScrollArea className="h-72 w-full rounded-md border p-4 font-body text-base">
-                        <p className="whitespace-pre-wrap">{story.zh}</p>
-                    </ScrollArea>
+                <div className='flex flex-col h-full gap-6'>
+                  <Input
+                    {...register("title", { required: true })}
+                    placeholder={t('story_title_placeholder')}
+                    className="h-14 text-xl font-bold bg-slate-50/50 border-slate-100 focus:border-blue-400 focus:ring-blue-400 px-6"
+                  />
+                  <ScrollArea className="flex-grow h-[300px] w-full rounded-2xl border border-slate-100 bg-slate-50/20 p-8 font-body text-lg leading-relaxed text-slate-700">
+                    <p className="whitespace-pre-wrap">{story.zh}</p>
+                  </ScrollArea>
                 </div>
               )}
             </CardContent>
-             <CardFooter>
-                 <Button onClick={handleSave} disabled={isSaving || !story}>
-                    {isSaving ? (
-                        <Loader2 className="animate-spin" />
-                    ) : (
-                        <BookUp className="mr-2" />
-                    )}
-                    {t('save_story')}
-                </Button>
-              </CardFooter>
+            <CardFooter className="pt-4">
+              <Button
+                onClick={handleSave}
+                disabled={isSaving || !story}
+                variant="outline"
+                className="w-full h-14 text-lg font-bold border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition-all"
+              >
+                {isSaving ? (
+                  <Loader2 className="animate-spin h-6 w-6" />
+                ) : (
+                  <BookUp className="mr-3 h-6 w-6" />
+                )}
+                {t('save_story')}
+              </Button>
+            </CardFooter>
           </Card>
         </div>
       </form>

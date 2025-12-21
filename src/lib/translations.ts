@@ -125,6 +125,17 @@ export const translations = {
     submit_feedback_button: 'Submit Feedback',
     feedback_submitted_title: 'Feedback Received',
     feedback_submitted_description: 'Thank you for sharing your story! We\'ll take a look soon.',
+
+    // Story Expansion
+    expand_your_story_title: 'Expand Your Story',
+    expand_your_story_subtitle: 'Turn your simple outline into a rich and wonderful story.',
+    your_outline_title: 'Your Outline',
+    your_outline_description: 'Paste your story outline here, or use one from a template.',
+    outline_placeholder_squirrel: 'A shy squirrel wants to make friends...',
+    expand_story_button: 'Expand Story',
+    your_completed_story_title: 'Your Completed Story',
+    your_completed_story_subtitle: 'Here is the full version of your story!',
+    expanded_story_placeholder_text: 'Your expanded story will magically appear here.',
   },
   zh: {
     // App
@@ -252,6 +263,17 @@ export const translations = {
     submit_feedback_button: '提交回饋',
     feedback_submitted_title: '已收到回饋',
     feedback_submitted_description: '感謝分享您的故事！我們很快就會查看。',
+
+    // Story Expansion
+    expand_your_story_title: '擴展您的故事',
+    expand_your_story_subtitle: '將您的簡單大綱變成豐富而精彩的故事。',
+    your_outline_title: '您的大綱',
+    your_outline_description: '在下方貼上您的故事大綱，或使用模板。',
+    outline_placeholder_squirrel: '一隻害羞的松鼠想交朋友...',
+    expand_story_button: '擴展故事',
+    your_completed_story_title: '您的完整故事',
+    your_completed_story_subtitle: '這是您故事的完整版本！',
+    expanded_story_placeholder_text: '您擴展的故事將神奇地出現在這裡。',
   },
 };
 
