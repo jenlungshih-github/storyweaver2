@@ -100,6 +100,19 @@ export const translations = {
     rate_limit_title: 'Too Many Requests',
     rate_limit_description: 'You have hit the API rate limit. Please wait a moment and try again.',
 
+    // Writing Skills
+    improve_writing_skills: 'Improve Your Writing Skills',
+    improve_writing_skills_description: 'Learn simple techniques to make your children\'s stories more attractive and magical.',
+    skill_concise_title: 'Use Simple and Clear Language',
+    skill_concise_content: 'Children often have limited vocabularies and shorter attention spans. Use direct, active sentences and familiar words. Avoid complex jargon or overly long descriptions that might lose their interest.',
+    skill_sounds_title: 'Appeal to Hearing',
+    skill_sounds_content: 'Use onomatopoeia (words that sound like what they mean, such as \'buzz\', \'splash\', or \'clatter\'). Read your story aloud to ensure it has a pleasing rhythm and flow.',
+    skill_surprises_title: 'Add Surprises',
+    skill_surprises_content: 'Keep young readers engaged by including unexpected twists, funny moments, or magical transformations. A surprise can be as simple as a squirrel that talks or a flower that glows in the dark.',
+    skill_repetition_title: 'Use Repetition',
+    skill_repetition_content: 'Repetition of phrases or themes helps children follow the story and predict what might happen next. It creates a sense of comfort and rhythm, like a familiar song.',
+    skill_show_dont_tell_title: 'Show, Don\'t Tell',
+    skill_show_dont_tell_content: 'Instead of saying \'The dragon was scary,\' describe its smoke-filled nostrils and the way the ground shook with its roar. Let the reader feel the emotion through actions and sensory details.',
   },
   zh: {
     // App
@@ -201,6 +214,20 @@ export const translations = {
     error_getting_feedback_generic: '獲取回饋時發生錯誤。',
     rate_limit_title: '請求過於頻繁',
     rate_limit_description: '您已達到API請求上限。請稍後再試。',
+
+    // Writing Skills
+    improve_writing_skills: '提升您的寫作技巧',
+    improve_writing_skills_description: '學習簡單的技巧，讓您的兒童故事更具吸引力和魔力。',
+    skill_concise_title: '使用簡單明瞭的語言',
+    skill_concise_content: '兒童的詞彙量有限，注意力也較短。使用直接、主動的句子和熟悉的詞彙。避免可能讓他們失去興趣的複雜術語或過長的描述。',
+    skill_sounds_title: '吸引聽覺',
+    skill_sounds_content: '使用擬聲詞（聽起來像其含義的詞，如「砰」、「嘩啦」或「嘎吱」）。大聲朗讀你的故事，確保它有悅耳的節奏和流暢感。',
+    skill_surprises_title: '加入驚喜',
+    skill_surprises_content: '通過加入意想不到的轉折、有趣的時刻或神奇的轉變來保持小讀者的參與。驚喜可以很簡單，比如一隻會說話的松鼠或一朵在黑暗中發光的花。',
+    skill_repetition_title: '使用重複',
+    skill_repetition_content: '短語或主題的重複可以幫助孩子跟隨故事並預測接下來可能發生的事情。它能創造一種舒適感和節奏感，就像一首熟悉的歌。',
+    skill_show_dont_tell_title: '展示，而不是告知',
+    skill_show_dont_tell_content: '不要只說「巨龍很可怕」，而是描述它噴煙的鼻孔和大地隨其吼聲震動的樣子。讓讀者通過行動和感官細節感受到情感。',
   },
 };
 
