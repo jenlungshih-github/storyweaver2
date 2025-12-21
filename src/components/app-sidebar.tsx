@@ -34,6 +34,7 @@ import {
 import { useLanguage } from "@/context/language-context";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { AuthDialog } from "@/components/auth-dialog";
+import { FirebaseStatus } from "@/components/firebase-status";
 import { signInAnonymously, onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
@@ -232,6 +233,9 @@ export function AppSidebar() {
             </>
           )}
         </SidebarMenu>
+        <div className="px-4 pb-4">
+          <FirebaseStatus />
+        </div>
       </SidebarFooter>
     </Sidebar>
   );
