@@ -34,7 +34,7 @@ This project is built with the following technologies:
 
 ## Version History
 
-### v0.3.0
+### v0.3.0.1
 - **AI Story Feedback**: Implemented a new Genkit flow (`provide-story-feedback`) that uses a specialized prompt to deliver expert-level editorial feedback on children's stories, focusing on clarity, engagement, character, theme, and descriptive writing.
 
 ### v0.2.0
