@@ -1,5 +1,12 @@
 {
-    "apphosting": {
-        "public": ".next"
-    }
+  "hosting": {
+    "site": "storyweaver2-1104f",
+    "source": ".",
+    "rewrites": [
+      {
+        "source": "**",
+        "app": "storyweaver2"
+      }
+    ]
+  }
 }
