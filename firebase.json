@@ -5,7 +5,10 @@
     "rewrites": [
       {
         "source": "**",
-        "app": "storyweaver2"
+        "app": {
+          "backendId": "storyweaver2",
+          "region": "us-central1"
+        }
       }
     ]
   }
