@@ -27,7 +27,7 @@ export default function TestApiPage() {
         <div className="flex items-center justify-center min-h-screen bg-neutral-950 p-4">
             <Card className="w-full max-w-md border-neutral-800 bg-neutral-900 text-neutral-100">
                 <CardHeader>
-                    <CardTitle>API Key Verification (v2)</CardTitle>
+                    <CardTitle>API Key Verification</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <p className="text-sm text-neutral-400">
