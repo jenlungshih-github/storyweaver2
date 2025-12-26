@@ -14,6 +14,7 @@ export default function AppLayout({
         <div className="min-h-screen lg:p-8 p-4">
           {children}
         </div>
+        <div className="app-version">v0.3.1</div>
       </SidebarInset>
     </SidebarProvider>
   );

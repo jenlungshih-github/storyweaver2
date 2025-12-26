@@ -1,9 +1,9 @@
-
 "use client";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PenTool } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
+import { ClientOnly } from "@/components/client-only";
 
 export default function WritingSkillsPage() {
   const { t } = useLanguage();
@@ -46,18 +46,20 @@ export default function WritingSkillsPage() {
         {t('improve_writing_skills_description')}
       </p>
 
-      <Accordion type="single" collapsible className="w-full">
-        {skills.map(skill => (
-          <AccordionItem value={skill.id} key={skill.id}>
-            <AccordionTrigger className="text-xl font-headline hover:no-underline">
-              {skill.title}
-            </AccordionTrigger>
-            <AccordionContent className="prose prose-lg max-w-none text-base">
-              <p className="whitespace-pre-wrap">{skill.content}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <ClientOnly>
+        <Accordion type="single" collapsible className="w-full">
+          {skills.map(skill => (
+            <AccordionItem value={skill.id} key={skill.id}>
+              <AccordionTrigger className="text-xl font-headline hover:no-underline">
+                {skill.title}
+              </AccordionTrigger>
+              <AccordionContent className="prose prose-lg max-w-none text-base">
+                <p className="whitespace-pre-wrap">{skill.content}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </ClientOnly>
     </div>
   );
 }

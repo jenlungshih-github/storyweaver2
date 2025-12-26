@@ -26,6 +26,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </LanguageProvider>
+        <div className="app-version">v0.3.1</div>
       </body>
     </html>
   );
