@@ -25,10 +25,14 @@ export async function testApiKey() {
     }
 
     try {
-        // We use the 'ai' object which now has the de-duplication logic in genkit.ts
+        console.log('--- Starting ai.generate ---');
+        console.log('Model:', (ai as any).model || 'default');
+
         const response = await ai.generate({
-            prompt: 'Say "API Key de-duplication successful!" if you can see this.',
+            prompt: 'Say "System ready!"',
         });
+
+        console.log('--- ai.generate Success ---');
 
         return {
             success: true,
@@ -36,11 +40,13 @@ export async function testApiKey() {
             diagnostic: keyInfo
         };
     } catch (error: any) {
-        console.error('API Key Test Error:', error);
+        console.error('CRITICAL AI ERROR:', error);
+
+        // Return as much info as possible even on failure
         return {
             success: false,
-            error: error.message || 'Unknown error occurred',
-            diagnostic: keyInfo
+            error: `AI Error: ${error.message || 'No message'}. Stack: ${error.stack?.substring(0, 100) || 'None'}`,
+            diagnostic: keyInfo + ` | Internal Error: ${error.name}`
         };
     }
 }

@@ -18,7 +18,8 @@ if (!apiKey && process.env.NODE_ENV === 'production') {
   console.warn('GOOGLE_GENAI_API_KEY is not set in production. Please check your Firebase App Hosting secret configuration.');
 }
 
+// Use a stable, well-supported model for reliability
 export const ai = genkit({
   plugins: [googleAI({ apiKey: apiKey })],
-  model: 'googleai/gemini-2.5-flash',
+  model: 'googleai/gemini-2.0-flash',
 });
