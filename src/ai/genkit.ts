@@ -20,5 +20,5 @@ if (!apiKey && process.env.NODE_ENV === 'production') {
 
 export const ai = genkit({
   plugins: [googleAI({ apiKey: apiKey })],
-  model: 'googleai/gemini-1.5-flash',
+  model: 'googleai/gemini-2.5-flash',
 });
