@@ -1,5 +1,7 @@
 # Settings to manage and configure a Firebase App Hosting backend.
 # https://firebase.google.com/docs/app-hosting/configure
+# IMPORTANT: Avoid manual code modifications in the Firebase Studio online editor.
+# Use your local development environment and Git push for all changes.
 
 runConfig:
   # Increase this value if you'd like to automatically spin up
