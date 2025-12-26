@@ -1,4 +1,4 @@
-# Storyweaver (v0.2.0)
+# Storyweaver (v0.3.1)
 
 This is a Next.js application built with Firebase, featuring AI-powered story generation, writing techniques, and comprehensive story management.
 
@@ -32,7 +32,38 @@ This project is built with the following technologies:
 - [x] **Connectivity Monitoring**: Real-time status display for Firebase services.
 - [x] **Modern UI**: A responsive, theme-aware interface built with Tailwind CSS and Radix UI.
 
+## Production Deployment & Secret Management
+
+Deploying this application to Firebase App Hosting requires special configuration for the `GOOGLE_GENAI_API_KEY` to ensure the AI features work in a production environment.
+
+The application is configured in `apphosting.yaml` to use a secret named `GOOGLE_GENAI_API_KEY`. This secret must be created in Google Cloud Secret Manager and the App Hosting backend needs to be granted access to it.
+
+### Secret Setup Steps:
+
+1.  **Login to Firebase:**
+    ```bash
+    firebase login --reauth
+    ```
+
+2.  **Set the Secret:** This command will create the secret if it doesn't exist or update it. You will be prompted to paste your API key.
+    ```bash
+    npx firebase apphosting:secrets:set GOOGLE_GENAI_API_KEY
+    ```
+
+3.  **Grant Access to the Backend:** You need to grant the App Hosting backend permission to access the secret. Replace `storyweaver2` with your backend ID if it's different (you can find it with `npx firebase apphosting:backends:list`).
+    ```bash
+    npx firebase apphosting:secrets:grantaccess GOOGLE_GENAI_API_KEY --backend=storyweaver2
+    ```
+
+4.  **Deploy:**
+    ```bash
+    firebase deploy
+    ```
+
 ## Version History
+
+### v0.3.1
+- **Production Hotfix**: Resolved a critical deployment issue where the Firebase App Hosting backend failed to access the `GOOGLE_GENAI_API_KEY`. This involved correctly setting up the secret in Google Cloud Secret Manager and granting the App Hosting backend explicit permission to access it.
 
 ### v0.3.0.1
 - **AI Story Feedback**: Implemented a new Genkit flow (`provide-story-feedback`) that uses a specialized prompt to deliver expert-level editorial feedback on children's stories, focusing on clarity, engagement, character, theme, and descriptive writing.
