@@ -50,9 +50,16 @@ export default function TestApiPage() {
                     </Button>
 
                     {result && (
-                        <div className={`p-4 rounded-md text-sm ${result.success ? 'bg-green-900/30 text-green-300 border border-green-800' : 'bg-red-900/30 text-red-300 border border-red-800'}`}>
-                            <p className="font-bold mb-1">{result.success ? 'Success!' : 'Error Failed'}</p>
-                            <p className="font-mono text-xs break-all">{result.success ? result.message : result.error}</p>
+                        <div className="space-y-2">
+                            <div className={`p-4 rounded-md text-sm ${result.success ? 'bg-green-900/30 text-green-300 border border-green-800' : 'bg-red-900/30 text-red-300 border border-red-800'}`}>
+                                <p className="font-bold mb-1">{result.success ? 'Success!' : 'Error Failed'}</p>
+                                <p className="font-mono text-xs break-all">{result.success ? result.message : result.error}</p>
+                            </div>
+
+                            <div className="p-3 rounded-md bg-neutral-800/50 border border-neutral-700 text-[10px] font-mono text-neutral-400">
+                                <p className="font-bold mb-1 text-neutral-300">SERVER DIAGNOSTIC:</p>
+                                <p>{(result as any).diagnostic || 'No diagnostic info available'}</p>
+                            </div>
                         </div>
                     )}
                 </CardContent>
