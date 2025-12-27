@@ -1,4 +1,4 @@
-# Storyweaver (v0.4.0)
+# Storyweaver (v0.4.1)
 
 This is a Next.js application built with Firebase, featuring AI-powered story generation, writing techniques, and comprehensive story management.
 
@@ -64,6 +64,11 @@ The application is configured in `apphosting.yaml` to use a secret named `GOOGLE
     ```
 
 ## Version History
+
+### v0.4.1
+- **Interactive Image Uploads**: Transformed story images into clickable triggers for replacement.
+- **Hover Feedback**: Added a sleek dark overlay with progress indicators to improve the upload UX.
+- **Unified Logic**: Streamlined the `ImageReplace` component to support both child-based triggers and standalone buttons.
 
 ### v0.4.0
 - **Story Image Uploads**: Integrated Firebase Storage to allow users to upload and replace story cover images.
