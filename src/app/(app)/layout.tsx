@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import packageJson from '../../../package.json';
 
 
 export default function AppLayout({
@@ -14,6 +15,7 @@ export default function AppLayout({
         <div className="min-h-screen lg:p-8 p-4">
           {children}
         </div>
+        <div className="app-version">v{packageJson.version}</div>
       </SidebarInset>
     </SidebarProvider>
   );

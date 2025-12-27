@@ -22,9 +22,17 @@ export default function StoryCollectionsPage() {
         const fetchCollections = async () => {
             setIsLoading(true);
             try {
-                const q = query(collection(db, 'story_collections'), orderBy('copiedAt', 'desc'));
-                const querySnapshot = await getDocs(q);
-                const storiesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Story));
+                // Try with orderBy first
+                let q = query(collection(db, 'story_collections'), orderBy('copiedAt', 'desc'));
+                let querySnapshot = await getDocs(q);
+
+                // If empty or failing, try without orderBy to see if documents exist without the field
+                if (querySnapshot.empty) {
+                    q = query(collection(db, 'story_collections'));
+                    querySnapshot = await getDocs(q);
+                }
+
+                const storiesData = querySnapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() } as Story));
                 setStories(storiesData);
             } catch (error) {
                 console.error("Error fetching collections: ", error);
@@ -59,25 +67,25 @@ export default function StoryCollectionsPage() {
             ) : filteredStories.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredStories.map((story, index) => {
-                        const image = PlaceHolderImages[index % PlaceHolderImages.length];
+                        const placeholder = PlaceHolderImages[index % PlaceHolderImages.length];
+                        const displayImage = story.imageUrl || placeholder.imageUrl;
+
                         return (
                             <Card key={story.id} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white/50 backdrop-blur-sm border-accent/20">
                                 <CardHeader className="p-0">
-                                    {image && (
-                                        <div className="aspect-video relative w-full overflow-hidden">
-                                            <Image
-                                                src={image.imageUrl}
-                                                alt={image.description}
-                                                fill
-                                                className="object-cover"
-                                                priority={index < 3}
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                            <CardTitle className="absolute bottom-4 left-4 right-4 text-white font-headline line-clamp-1">
-                                                {story.title}
-                                            </CardTitle>
-                                        </div>
-                                    )}
+                                    <div className="aspect-[4/3] relative w-full overflow-hidden">
+                                        <Image
+                                            src={displayImage}
+                                            alt={story.title}
+                                            fill
+                                            className="object-cover"
+                                            priority={index < 3}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                        <CardTitle className="absolute bottom-4 left-4 right-4 text-white font-headline line-clamp-1">
+                                            {story.title}
+                                        </CardTitle>
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="flex-grow p-6">
                                     <CardDescription className="text-gray-700 line-clamp-3">

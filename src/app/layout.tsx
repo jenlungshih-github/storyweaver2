@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { LanguageProvider } from '@/context/language-context';
+import packageJson from '../../package.json';
 
 export const metadata: Metadata = {
   title: 'Children Story Teller',
@@ -26,7 +27,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </LanguageProvider>
-        <div className="app-version">v0.4.1</div>
+        <div className="app-version">v{packageJson.version}</div>
       </body>
     </html>
   );

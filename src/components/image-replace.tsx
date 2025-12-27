@@ -13,9 +13,11 @@ interface ImageReplaceProps {
     storyId: string;
     currentImageUrl?: string;
     onSuccess?: (url: string) => void;
+    children?: React.ReactNode;
+    className?: string;
 }
 
-export function ImageReplace({ storyId, currentImageUrl, onSuccess }: ImageReplaceProps) {
+export function ImageReplace({ storyId, currentImageUrl, onSuccess, children, className }: ImageReplaceProps) {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -46,15 +48,25 @@ export function ImageReplace({ storyId, currentImageUrl, onSuccess }: ImageRepla
 
             uploadTask.on(
                 'state_changed',
-                (snapshot: any) => { // Using any for Firebase internal types to simplify
+                (snapshot: any) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     setUploadProgress(progress);
                 },
-                (error: Error) => {
+                (error: any) => {
                     console.error("Upload error:", error);
+                    let errorMessage = "There was an error uploading your image.";
+
+                    if (error.code === 'storage/unauthorized') {
+                        errorMessage = "Permission denied. Please check your Firebase Storage security rules.";
+                    } else if (error.code === 'storage/canceled') {
+                        errorMessage = "Upload canceled.";
+                    } else if (error.message) {
+                        errorMessage = error.message;
+                    }
+
                     toast({
                         title: "Upload failed",
-                        description: "There was an error uploading your image.",
+                        description: errorMessage,
                         variant: "destructive",
                     });
                     setIsUploading(false);
@@ -91,11 +103,46 @@ export function ImageReplace({ storyId, currentImageUrl, onSuccess }: ImageRepla
     };
 
     const triggerFileInput = () => {
-        fileInputRef.current?.click();
+        if (!isUploading) {
+            fileInputRef.current?.click();
+        }
     };
 
+    if (children) {
+        return (
+            <div className={`relative group cursor-pointer ${className}`} onClick={triggerFileInput}>
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    accept="image/*"
+                    className="hidden"
+                />
+                {children}
+
+                {/* Overlay on hover/upload */}
+                <div className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center transition-opacity duration-300 ${isUploading ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                    {isUploading ? (
+                        <div className="flex flex-col items-center gap-2 text-white">
+                            <Loader2 className="h-8 w-8 animate-spin" />
+                            <span className="text-sm font-bold">{Math.round(uploadProgress)}%</span>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center gap-1 text-white">
+                            <Upload className="h-8 w-8" />
+                            <span className="text-xs font-medium bg-black/50 px-2 py-1 rounded">
+                                Click to {currentImageUrl ? 'Replace' : 'Add'} Image
+                            </span>
+                            <span className="text-[10px] opacity-70">1024x768 recommended</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col gap-2">
+        <div className={`flex flex-col gap-2 ${className}`}>
             <input
                 type="file"
                 ref={fileInputRef}

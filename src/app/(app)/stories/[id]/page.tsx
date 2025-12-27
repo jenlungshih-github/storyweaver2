@@ -30,11 +30,19 @@ export default function StoryPage() {
       setIsLoading(true);
       setError(null);
       try {
-        const storyDoc = await getDoc(doc(db, 'stories', id as string));
+        // First try the 'stories' collection
+        let storyDoc = await getDoc(doc(db, 'stories', id as string));
+
         if (storyDoc.exists()) {
           setStory({ id: storyDoc.id, ...storyDoc.data() } as Story);
         } else {
-          setError("Story not found.");
+          // Fallback to 'story_collections'
+          storyDoc = await getDoc(doc(db, 'story_collections', id as string));
+          if (storyDoc.exists()) {
+            setStory({ id: storyDoc.id, ...storyDoc.data() } as Story);
+          } else {
+            setError("Story not found.");
+          }
         }
       } catch (err) {
         console.error("Error fetching story:", err);
