@@ -101,7 +101,7 @@ export default function StoryCollectionsPage() {
                 {t('stories_description')}
             </p>
 
-            {user?.isAnonymous && (
+            {(!user || user.isAnonymous) && (
                 <Card className="mb-12 border-accent/30 bg-accent/5 overflow-hidden relative group">
                     <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
                         <Sparkles className="h-32 w-32 text-accent" />

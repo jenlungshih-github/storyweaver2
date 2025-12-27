@@ -25,7 +25,7 @@ export default function NewStoryPage() {
 
   if (loading) return null;
 
-  if (user?.isAnonymous) {
+  if (!user || user.isAnonymous) {
     return (
       <div className="container mx-auto max-w-4xl py-12">
         <div className="flex items-center gap-4 mb-8">

@@ -179,7 +179,7 @@ export function AppSidebar() {
 
       <SidebarMenu>
         {menuItems.map((item) => {
-          const isRestricted = item.requiresAuth && user?.isAnonymous;
+          const isRestricted = item.requiresAuth && (!user || user.isAnonymous);
           return (
             <SidebarMenuItem key={item.labelKey}>
               <SidebarMenuButton
