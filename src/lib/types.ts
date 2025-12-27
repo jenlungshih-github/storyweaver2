@@ -13,5 +13,6 @@ export type Story = {
   outline: StoryOutline;
   content: string;
   language: 'zh' | 'en';
+  imageUrl?: string;
   createdAt: Timestamp;
 };

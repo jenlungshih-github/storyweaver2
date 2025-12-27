@@ -11,6 +11,10 @@ import { Button } from '@/components/ui/button';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/context/language-context';
 
+import Image from 'next/image';
+import { ImageReplace } from '@/components/image-replace';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+
 export default function StoryPage() {
   const { id } = useParams();
   const router = useRouter();
@@ -43,6 +47,12 @@ export default function StoryPage() {
     fetchStory();
   }, [id]);
 
+  const handleImageSuccess = (url: string) => {
+    if (story) {
+      setStory({ ...story, imageUrl: url });
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-96">
@@ -57,27 +67,51 @@ export default function StoryPage() {
         <h2 className="text-2xl font-bold text-destructive mb-4">Error</h2>
         <p>{error}</p>
         <Button onClick={() => router.push('/stories')} className="mt-4">
-            <ArrowLeft className="mr-2" /> Back to Stories
+          <ArrowLeft className="mr-2" /> Back to Stories
         </Button>
       </div>
     );
   }
 
   if (!story) {
-    return null; 
+    return null;
   }
+
+  const placeholder = PlaceHolderImages[0];
+  const displayImage = story.imageUrl || placeholder.imageUrl;
 
   return (
     <div className="container mx-auto max-w-4xl py-8">
-      <Button onClick={() => router.push('/stories')} variant="ghost" className="mb-8">
-        <ArrowLeft className="mr-2" /> {t('saved_stories')}
+      <Button onClick={() => router.push('/stories')} variant="ghost" className="mb-8 font-body">
+        <ArrowLeft className="mr-2 h-4 w-4" /> {t('saved_stories')}
       </Button>
-      <Card className="shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-4xl font-headline font-bold text-center">{story.title}</CardTitle>
+
+      <Card className="shadow-2xl overflow-hidden border-neutral-800 bg-neutral-900">
+        <div className="aspect-[4/3] relative w-full overflow-hidden">
+          <Image
+            src={displayImage}
+            alt={story.title}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute top-4 right-4 w-40">
+            <ImageReplace
+              storyId={story.id}
+              currentImageUrl={story.imageUrl}
+              onSuccess={handleImageSuccess}
+            />
+          </div>
+        </div>
+
+        <CardHeader className="text-center pt-8 pb-4">
+          <CardTitle className="text-4xl md:text-5xl font-headline font-bold text-white tracking-tight">
+            {story.title}
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="prose lg:prose-xl max-w-none mx-auto font-body text-lg leading-relaxed">
+
+        <CardContent className="px-8 pb-12">
+          <div className="prose prose-invert lg:prose-xl max-w-none mx-auto font-body text-neutral-300 leading-relaxed">
             <p className="whitespace-pre-wrap">{story.content}</p>
           </div>
         </CardContent>

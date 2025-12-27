@@ -26,6 +26,8 @@ import {
 import type { Story } from '@/lib/types';
 
 
+import { ImageReplace } from "@/components/image-replace";
+
 export default function StoriesPage() {
   const { t, language } = useLanguage();
   const { toast } = useToast();
@@ -38,11 +40,10 @@ export default function StoriesPage() {
       try {
         const q = query(collection(db, 'stories'), orderBy('createdAt', 'desc'));
         const querySnapshot = await getDocs(q);
-        const storiesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Story));
+        const storiesData = querySnapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() } as Story));
         setStories(storiesData);
       } catch (error) {
         console.error("Error fetching stories: ", error);
-        // Optionally, show a toast notification for the error
       } finally {
         setIsLoading(false);
       }
@@ -94,6 +95,10 @@ export default function StoriesPage() {
     }
   };
 
+  const handleImageSuccess = (storyId: string, url: string) => {
+    setStories(prev => prev.map(s => s.id === storyId ? { ...s, imageUrl: url } : s));
+  };
+
   // Filter stories based on the current language context
   const filteredStories = stories.filter(story => story.language === language);
 
@@ -114,25 +119,31 @@ export default function StoriesPage() {
       ) : filteredStories.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredStories.map((story, index) => {
-            // Cycle through placeholder images
-            const image = PlaceHolderImages[index % PlaceHolderImages.length];
+            // Cycle through placeholder images if no custom image
+            const placeholder = PlaceHolderImages[index % PlaceHolderImages.length];
+            const displayImage = story.imageUrl || placeholder.imageUrl;
+
             return (
               <Card key={story.id} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader>
-                  {image && (
-                    <div className="aspect-video relative w-full overflow-hidden rounded-t-lg">
-                      <Image
-                        src={image.imageUrl}
-                        alt={image.description}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover"
-                        data-ai-hint={image.imageHint}
-                        priority={index < 3}
+                <CardHeader className="p-0">
+                  <div className="aspect-[4/3] relative w-full overflow-hidden bg-neutral-800">
+                    <Image
+                      src={displayImage}
+                      alt={story.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                      priority={index < 3}
+                    />
+                    <div className="absolute top-2 right-2 w-32">
+                      <ImageReplace
+                        storyId={story.id}
+                        currentImageUrl={story.imageUrl}
+                        onSuccess={(url) => handleImageSuccess(story.id, url)}
                       />
                     </div>
-                  )}
-                  <CardTitle className="pt-4 font-headline">{story.title}</CardTitle>
+                  </div>
+                  <CardTitle className="px-6 pt-4 font-headline">{story.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <CardDescription>{getSnippet(story.content)}</CardDescription>
