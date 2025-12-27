@@ -1,4 +1,4 @@
-# Storyweaver (v0.4.4)
+# Storyweaver (v0.4.5)
 
 This is a Next.js application built with Firebase, featuring AI-powered story generation, writing techniques, and comprehensive story management.
 
@@ -64,6 +64,9 @@ The application is configured in `apphosting.yaml` to use a secret named `GOOGLE
     ```
 
 ## Version History
+
+### v0.4.5
+- **Traditional Chinese Localization**: Translated all guest restriction messages and onboarding content into Traditional Chinese, ensuring a seamless experience for localized users.
 
 ### v0.4.4
 - **Guest Access Restrictions**: Restricted guests (anonymous users) to reading Story Collections only. Create and Personal Library features are now locked with clear instructions for Guests to sign in.

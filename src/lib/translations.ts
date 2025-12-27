@@ -136,6 +136,13 @@ export const translations = {
     your_completed_story_title: 'Your Completed Story',
     your_completed_story_subtitle: 'Here is the full version of your story!',
     expanded_story_placeholder_text: 'Your expanded story will magically appear here.',
+    guest_restricted_title: 'Personal Creation Locked',
+    guest_restricted_description: 'As a guest, you can explore the Story Collections. To create your own magical stories, please sign in.',
+    guest_library_restricted_title: 'Personal Library Locked',
+    guest_library_restricted_description: 'This is your personal story vault. To save and organize your own stories, please sign in.',
+    guest_expansion_restricted_title: 'Expansion Magic Locked',
+    guest_expansion_restricted_description: 'Expanding outlines requires a personal library. Please sign in to unlock your full storytelling potential.',
+    sign_in: 'Sign In / Sign Up',
   },
   zh: {
     // App
@@ -274,6 +281,13 @@ export const translations = {
     your_completed_story_title: '您的完整故事',
     your_completed_story_subtitle: '這是您故事的完整版本！',
     expanded_story_placeholder_text: '您擴展的故事將神奇地出現在這裡。',
+    guest_restricted_title: '個人創作已鎖定',
+    guest_restricted_description: '作為訪客，您可以探索故事收藏。要創作您自己的魔法故事，請登入。',
+    guest_library_restricted_title: '個人書庫已鎖定',
+    guest_library_restricted_description: '這是您的個人故事保險箱。要儲存和整理您自己的故事，請登入。',
+    guest_expansion_restricted_title: '擴展魔法已鎖定',
+    guest_expansion_restricted_description: '擴展大綱需要個人書庫。請登入以解鎖您的全部故事創作潛力。',
+    sign_in: '登入 / 註冊',
   },
 };
 

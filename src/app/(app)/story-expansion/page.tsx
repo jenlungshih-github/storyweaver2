@@ -63,16 +63,16 @@ export default function StoryExpansionPage() {
               <Lock className="h-10 w-10 text-blue-600" />
             </div>
             <div className="space-y-2">
-              <h2 className="text-3xl font-headline font-bold text-slate-800">{t('guest_expansion_restricted_title' as any) || "Expansion Magic Locked"}</h2>
+              <h2 className="text-3xl font-headline font-bold text-slate-800">{t('guest_expansion_restricted_title')}</h2>
               <p className="text-lg text-slate-600 max-w-md mx-auto">
-                {t('guest_expansion_restricted_description' as any) || "Expanding outlines requires a personal library. Please sign in to unlock your full storytelling potential."}
+                {t('guest_expansion_restricted_description')}
               </p>
             </div>
             <div className="flex gap-4">
               <Button asChild className="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95 text-white">
                 <Link href="/">
                   <UserPlus className="mr-2 h-5 w-5" />
-                  {t('sign_in' as any) || "Sign In / Sign Up"}
+                  {t('sign_in')}
                 </Link>
               </Button>
             </div>
