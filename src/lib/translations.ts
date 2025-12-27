@@ -143,6 +143,8 @@ export const translations = {
     guest_expansion_restricted_title: 'Expansion Magic Locked',
     guest_expansion_restricted_description: 'Expanding outlines requires a personal library. Please sign in to unlock your full storytelling potential.',
     sign_in: 'Sign In / Sign Up',
+    guest_welcome_title: 'Welcome, Storyteller!',
+    guest_welcome_description: 'You\'re exploring our magical collections. Want to create your own stories? Sign in to unlock the full power of AI story weaving!',
   },
   zh: {
     // App
@@ -288,6 +290,8 @@ export const translations = {
     guest_expansion_restricted_title: '擴展魔法已鎖定',
     guest_expansion_restricted_description: '擴展大綱需要個人書庫。請登入以解鎖您的全部故事創作潛力。',
     sign_in: '登入 / 註冊',
+    guest_welcome_title: '歡迎，故事講述者！',
+    guest_welcome_description: '您正在探索我們的魔法收藏。想創作自己的故事嗎？登入以解鎖 AI 故事編織的所有力量！',
   },
 };
 
