@@ -126,7 +126,12 @@ export default function StoriesPage() {
             return (
               <Card key={story.id} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardHeader className="p-0">
-                  <div className="aspect-[4/3] relative w-full overflow-hidden bg-neutral-800">
+                  <ImageReplace
+                    storyId={story.id}
+                    currentImageUrl={story.imageUrl}
+                    onSuccess={(url) => handleImageSuccess(story.id, url)}
+                    className="aspect-[4/3] w-full"
+                  >
                     <Image
                       src={displayImage}
                       alt={story.title}
@@ -135,14 +140,7 @@ export default function StoriesPage() {
                       className="object-cover"
                       priority={index < 3}
                     />
-                    <div className="absolute top-2 right-2 w-32">
-                      <ImageReplace
-                        storyId={story.id}
-                        currentImageUrl={story.imageUrl}
-                        onSuccess={(url) => handleImageSuccess(story.id, url)}
-                      />
-                    </div>
-                  </div>
+                  </ImageReplace>
                   <CardTitle className="px-6 pt-4 font-headline">{story.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">

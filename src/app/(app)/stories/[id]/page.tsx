@@ -87,7 +87,12 @@ export default function StoryPage() {
       </Button>
 
       <Card className="shadow-2xl overflow-hidden border-neutral-800 bg-neutral-900">
-        <div className="aspect-[4/3] relative w-full overflow-hidden">
+        <ImageReplace
+          storyId={story.id}
+          currentImageUrl={story.imageUrl}
+          onSuccess={handleImageSuccess}
+          className="aspect-[4/3] w-full"
+        >
           <Image
             src={displayImage}
             alt={story.title}
@@ -95,14 +100,7 @@ export default function StoryPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute top-4 right-4 w-40">
-            <ImageReplace
-              storyId={story.id}
-              currentImageUrl={story.imageUrl}
-              onSuccess={handleImageSuccess}
-            />
-          </div>
-        </div>
+        </ImageReplace>
 
         <CardHeader className="text-center pt-8 pb-4">
           <CardTitle className="text-4xl md:text-5xl font-headline font-bold text-white tracking-tight">
