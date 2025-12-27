@@ -1,4 +1,4 @@
-# Storyweaver (v0.3.1)
+# Storyweaver (v0.4.0)
 
 This is a Next.js application built with Firebase, featuring AI-powered story generation, writing techniques, and comprehensive story management.
 
@@ -16,6 +16,8 @@ This project is built with the following technologies:
 *   **Icons**: [Lucide React](https://lucide.dev/)
 *   **AI Integration**: [Genkit](https://firebase.google.com/docs/genkit) (v1.20.0) with Google Gemini AI
 *   **Backend & Auth**: [Firebase](https://firebase.google.com/) (v11.9.1)
+*   **Database**: [Firestore](https://firebase.google.com/docs/firestore)
+*   **Storage**: [Firebase Storage](https://firebase.google.com/docs/storage)
 *   **Forms**: [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
 *   **Deployment**: [Firebase App Hosting](https://firebase.google.com/docs/app-hosting)
 
@@ -26,11 +28,12 @@ This project is built with the following technologies:
   - **Story Ideas**: Generate creative starting points for narratives.
   - **Outline Expansion**: Transform brief outlines into rich, multi-language children's stories.
   - **Story Feedback**: Get AI-powered critiques and suggestions.
+- [x] **Story Image Management**: Upload and replace cover images for every story. Automatic **4:3 landscape ratio** enforcement for a consistent UI.
 - [x] **Writing Techniques**: A dedicated section to help users improve their storytelling with practical tips.
 - [x] **Submit Feedback**: Direct channel for users to share their work and get professional input.
 - [x] **Story Management**: Save, view, and organize your creative work with Firestore.
 - [x] **Connectivity Monitoring**: Real-time status display for Firebase services.
-- [x] **Modern UI**: A responsive, theme-aware interface built with Tailwind CSS and Radix UI.
+- [x] **Professional UI**: A responsive, high-performance interface built with Tailwind CSS and Radix UI.
 
 ## Production Deployment & Secret Management
 
@@ -62,11 +65,20 @@ The application is configured in `apphosting.yaml` to use a secret named `GOOGLE
 
 ## Version History
 
+### v0.4.0
+- **Story Image Uploads**: Integrated Firebase Storage to allow users to upload and replace story cover images.
+- **Aspect Ratio Enforcement**: Forced a 4:3 landscape aspect ratio across the UI for consistency.
+- **UI Polish**: Added "Replace Image" buttons to both the story library and detail pages.
+
+### v0.3.2
+- **Robust API Protection**: Implemented self-healing logic to detect and de-duplicate mangled API keys (e.g., if pasted twice in the secret manager).
+- **Diagnostics**: Added a temporary diagnostic tool to verify API key validity in production.
+
 ### v0.3.1
 - **Production Hotfix**: Resolved a critical deployment issue where the Firebase App Hosting backend failed to access the `GOOGLE_GENAI_API_KEY`. This involved correctly setting up the secret in Google Cloud Secret Manager and granting the App Hosting backend explicit permission to access it.
 
 ### v0.3.0.1
-- **AI Story Feedback**: Implemented a new Genkit flow (`provide-story-feedback`) that uses a specialized prompt to deliver expert-level editorial feedback on children's stories, focusing on clarity, engagement, character, theme, and descriptive writing.
+- **AI Story Feedback**: Implemented a new Genkit flow (`provide-story-feedback`) that uses a specialized prompt to deliver expert-level editorial feedback on children's stories.
 
 ### v0.2.0
 - Implemented Guest Login and environment-based configuration.
