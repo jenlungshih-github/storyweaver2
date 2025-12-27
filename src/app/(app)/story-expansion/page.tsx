@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { expandStoryOutline } from '@/ai/flows/expand-story-outline';
 import { saveStory } from '@/lib/actions/story.actions';
@@ -16,9 +16,12 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Sparkles, Wand, BookUp } from 'lucide-react';
+import { Loader2, Sparkles, Wand, BookUp, Lock, UserPlus } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import Link from 'next/link';
 
 type FormData = {
   outline: string;
@@ -29,10 +32,55 @@ export default function StoryExpansionPage() {
   const { t } = useLanguage();
   const { toast } = useToast();
   const { register, handleSubmit, getValues, setValue } = useForm<FormData>();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [story, setStory] = useState<{ zh: string; en: string } | null>(null);
   const [titles, setTitles] = useState<{ zh: string; en: string } | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) return null;
+
+  if (user?.isAnonymous) {
+    return (
+      <div className="container mx-auto max-w-4xl py-12">
+        <div className="flex items-center gap-4 mb-8">
+          <Sparkles className="h-12 w-12 text-slate-800 opacity-50" />
+          <h1 className="text-5xl font-headline font-bold text-slate-400">{t('expand_your_story_title')}</h1>
+        </div>
+
+        <Card className="border-2 border-dashed bg-blue-50/30 border-blue-100">
+          <CardContent className="flex flex-col items-center text-center py-16 gap-6">
+            <div className="h-20 w-20 rounded-full bg-blue-100 flex items-center justify-center">
+              <Lock className="h-10 w-10 text-blue-600" />
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-3xl font-headline font-bold text-slate-800">{t('guest_expansion_restricted_title' as any) || "Expansion Magic Locked"}</h2>
+              <p className="text-lg text-slate-600 max-w-md mx-auto">
+                {t('guest_expansion_restricted_description' as any) || "Expanding outlines requires a personal library. Please sign in to unlock your full storytelling potential."}
+              </p>
+            </div>
+            <div className="flex gap-4">
+              <Button asChild className="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95 text-white">
+                <Link href="/">
+                  <UserPlus className="mr-2 h-5 w-5" />
+                  {t('sign_in' as any) || "Sign In / Sign Up"}
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   const handleExpand = async (data: FormData) => {
     setIsLoading(true);

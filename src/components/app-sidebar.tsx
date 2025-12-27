@@ -30,6 +30,7 @@ import {
   CheckCircle2,
   LogOut,
   Library,
+  Lock,
 } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -118,16 +119,19 @@ export function AppSidebar() {
       href: "/story-creator",
       icon: BookMarked,
       labelKey: 'create_your_story',
+      requiresAuth: true,
     },
     {
       href: "/story-expansion",
       icon: Sparkles,
       labelKey: 'story_expansion',
+      requiresAuth: true,
     },
     {
       href: "/stories",
       icon: Archive,
       labelKey: 'saved_stories',
+      requiresAuth: true,
     },
     {
       href: "/story-collections",
@@ -174,21 +178,26 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarMenu>
-        {menuItems.map((item) => (
-          <SidebarMenuItem key={item.labelKey}>
-            <SidebarMenuButton
-              asChild
-              isActive={!item.external && pathname === item.href}
-              tooltip={t(item.labelKey as any)}
-            >
-              <Link href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
-                <item.icon />
-                <span>{t(item.labelKey as any)}</span>
-                {item.external && <ExternalLink className="ml-auto" />}
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))}
+        {menuItems.map((item) => {
+          const isRestricted = item.requiresAuth && user?.isAnonymous;
+          return (
+            <SidebarMenuItem key={item.labelKey}>
+              <SidebarMenuButton
+                asChild
+                isActive={!item.external && pathname === item.href}
+                tooltip={t(item.labelKey as any)}
+                className={isRestricted ? "opacity-60" : ""}
+              >
+                <Link href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
+                  <item.icon className={isRestricted ? "text-muted-foreground" : ""} />
+                  <span className={isRestricted ? "text-muted-foreground" : ""}>{t(item.labelKey as any)}</span>
+                  {isRestricted && <Lock className="ml-auto h-3 w-3 text-accent" />}
+                  {item.external && <ExternalLink className="ml-auto" />}
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          );
+        })}
       </SidebarMenu>
 
       <SidebarFooter className="mt-auto">

@@ -4,14 +4,15 @@
 import { useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpen, Loader2, Copy, Trash2 } from "lucide-react";
+import { BookOpen, Loader2, Copy, Trash2, Lock, UserPlus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useLanguage } from "@/context/language-context";
 import { useToast } from "@/hooks/use-toast";
-import { db } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
 import { collection, getDocs, query, orderBy, addDoc, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,7 +33,15 @@ export default function StoriesPage() {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   const [stories, setStories] = useState<Story[]>([]);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -112,7 +121,29 @@ export default function StoriesPage() {
         {t('stories_description')}
       </p>
 
-      {isLoading ? (
+      {user?.isAnonymous ? (
+        <Card className="border-2 border-dashed bg-accent/5 border-accent/20">
+          <CardContent className="flex flex-col items-center text-center py-16 gap-6">
+            <div className="h-20 w-20 rounded-full bg-accent/10 flex items-center justify-center">
+              <Lock className="h-10 w-10 text-accent" />
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-3xl font-headline font-bold">{t('guest_library_restricted_title' as any) || "Personal Library Locked"}</h2>
+              <p className="text-lg text-muted-foreground max-w-md mx-auto">
+                {t('guest_library_restricted_description' as any) || "This is your personal story vault. To save and organize your own stories, please sign in."}
+              </p>
+            </div>
+            <div className="flex gap-4">
+              <Button asChild className="bg-accent hover:bg-accent/90 px-8 py-6 text-lg rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95">
+                <Link href="/">
+                  <UserPlus className="mr-2 h-5 w-5" />
+                  {t('sign_in' as any) || "Sign In / Sign Up"}
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      ) : isLoading ? (
         <div className="flex justify-center items-center py-16">
           <Loader2 className="h-10 w-10 animate-spin text-primary" />
         </div>
