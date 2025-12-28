@@ -206,21 +206,9 @@ export function AppSidebar() {
             <LanguageSwitcher />
           </SidebarMenuItem>
           {!user && (
-            <>
-              <SidebarMenuItem>
-                <AuthDialog />
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={handleGuestLogin}
-                  disabled={loading}
-                  tooltip="Guest Login"
-                >
-                  <User className="h-4 w-4" />
-                  <span>{loading ? "Logging in..." : "Guest Login"}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </>
+            <SidebarMenuItem>
+              <AuthDialog />
+            </SidebarMenuItem>
           )}
           {user && (
             <>

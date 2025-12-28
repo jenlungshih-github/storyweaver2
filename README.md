@@ -1,4 +1,4 @@
-# Storyweaver (v0.4.6)
+# Storyweaver (v0.4.8)
 
 This is a Next.js application built with Firebase, featuring AI-powered story generation, writing techniques, and comprehensive story management.
 
@@ -64,6 +64,14 @@ The application is configured in `apphosting.yaml` to use a secret named `GOOGLE
     ```
 
 ## Version History
+
+### v0.4.8
+- **Super User Permissions**: Restricted story deletion within "Story Collections" to an authorized super user group (initially `jenlungshih@gmail.com`).
+- **Sidebar Cleanup**: Removed the "Guest Login" button to simplify navigation and encourage primary authentication flows.
+
+### v0.4.7
+- **Unified Access Control**: Secured "My Stories" and story creation tools for both completely unauthenticated visitors and guest users, providing a consistent onboarding experience.
+- **Enhanced Landing Guidance**: The default "Story Collections" landing page now displays a welcome banner for all non-registered users (visitors and guests alike), clearly explaining how to unlock full features.
 
 ### v0.4.6
 - **Default Landing Page**: Changed the root redirect to land users on the "Story Collections" page by default for a better first-time experience.

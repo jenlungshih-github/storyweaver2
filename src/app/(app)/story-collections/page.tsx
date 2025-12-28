@@ -26,6 +26,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import type { Story } from '@/lib/types';
+import { SUPER_USERS } from '@/lib/constants';
 
 export default function StoryCollectionsPage() {
     const { t, language } = useLanguage();
@@ -166,35 +167,37 @@ export default function StoryCollectionsPage() {
                                         </Link>
                                     </Button>
 
-                                    <AlertDialog>
-                                        <AlertDialogTrigger asChild>
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                className="w-full gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
-                                            >
-                                                <Trash2 className="h-4 w-4" />
-                                                {t('delete_story')}
-                                            </Button>
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                                <AlertDialogTitle>{t('delete_confirm_title')}</AlertDialogTitle>
-                                                <AlertDialogDescription>
-                                                    {t('delete_confirm_description')}
-                                                </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                                <AlertDialogCancel>{t('close')}</AlertDialogCancel>
-                                                <AlertDialogAction
-                                                    onClick={() => handleDeleteStory(story.id)}
-                                                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                    {user?.email && SUPER_USERS.includes(user.email) && (
+                                        <AlertDialog>
+                                            <AlertDialogTrigger asChild>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-full gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
                                                 >
+                                                    <Trash2 className="h-4 w-4" />
                                                     {t('delete_story')}
-                                                </AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
+                                                </Button>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>{t('delete_confirm_title')}</AlertDialogTitle>
+                                                    <AlertDialogDescription>
+                                                        {t('delete_confirm_description')}
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel>{t('close')}</AlertDialogCancel>
+                                                    <AlertDialogAction
+                                                        onClick={() => handleDeleteStory(story.id)}
+                                                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                                    >
+                                                        {t('delete_story')}
+                                                    </AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
+                                    )}
                                 </div>
                             </Card>
                         );
