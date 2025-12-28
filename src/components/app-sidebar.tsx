@@ -2,6 +2,7 @@
 "use client";
 
 import { MagicBookIcon } from "@/components/icons";
+import { SUPER_USERS } from '@/lib/constants';
 import {
   Sidebar,
   SidebarHeader,
@@ -142,6 +143,7 @@ export function AppSidebar() {
       href: "/example-library",
       icon: FileText,
       labelKey: 'example_library',
+      requiresSuperUser: true,
     },
     {
       href: "/writing-skills",
@@ -152,6 +154,7 @@ export function AppSidebar() {
       href: "/submit-feedback",
       icon: MessageSquare,
       labelKey: 'submit_feedback',
+      requiresSuperUser: true,
     },
     {
       href: "https://gemini.google.com/",
@@ -179,6 +182,10 @@ export function AppSidebar() {
 
       <SidebarMenu>
         {menuItems.map((item) => {
+          // Check if item requires super user and if the current user is one
+          const isSuperUser = user?.email && SUPER_USERS.includes(user.email);
+          if ((item as any).requiresSuperUser && !isSuperUser) return null;
+
           const isRestricted = item.requiresAuth && (!user || user.isAnonymous);
           return (
             <SidebarMenuItem key={item.labelKey}>
