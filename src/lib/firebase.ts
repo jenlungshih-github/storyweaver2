@@ -9,7 +9,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBm16gHe_q9LJS2H66ovpsyAhME8YgRidY",
+  apiKey: process.env.GOOGLE_GENAI_API_KEY,
   authDomain: "storyweaver2-1104f.firebaseapp.com",
   projectId: "storyweaver2-1104f",
   storageBucket: "storyweaver2-1104f.firebasestorage.app",
