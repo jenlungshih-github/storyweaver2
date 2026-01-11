@@ -9,7 +9,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.GOOGLE_GENAI_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "storyweaver2-1104f.firebaseapp.com",
   projectId: "storyweaver2-1104f",
   storageBucket: "storyweaver2-1104f.firebasestorage.app",
@@ -18,14 +18,25 @@ const firebaseConfig = {
   measurementId: "G-7V21YYJXE3"
 };
 
+
 // Initialize Firebase
 let app;
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApps()[0];
+try {
+  if (getApps().length === 0) {
+    if (!firebaseConfig.apiKey && typeof window !== 'undefined') {
+      console.warn("Firebase API Key is missing. Some features may be disabled.");
+    }
+    app = initializeApp(firebaseConfig);
+  } else {
+    app = getApps()[0];
+  }
+} catch (error) {
+  if (typeof window !== 'undefined') {
+    console.error("Firebase failed to initialize:", error);
+  }
 }
 
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const storage = getStorage(app);
+export const db = app ? getFirestore(app) : undefined as any;
+export const auth = app ? getAuth(app) : undefined as any;
+export const storage = app ? getStorage(app) : undefined as any;
+
